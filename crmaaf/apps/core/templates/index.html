@@ -1,0 +1,72 @@
+{% extends "base_generic.html" %}
+
+
+{% block subtitle %}
+// Главная
+{% endblock %}
+
+{% block content %}
+
+  <h4>Информационный портал АО «АзияАгроФуд»</h4>
+
+  <!-- Dashboard Cards-->
+  <div class="row">
+    <div class="col-sm-6 mb-2"> 
+      <div class="card">
+        <h5 class="card-header"><a href="{% url 'orders' %}">Распоряжений</a> <br/> на согласование</h5>
+        <div class="card-body">
+          <h3 class="card-title">Количество: {{ num_order_instance_consideration }}</h3>
+          <p class="card-text mb-0 text-muted">
+            <span class="text-success mr-2">
+            {% if last_order_instance_consideration %}
+            <i class="mdi mdi-arrow-up-bold"><a href="{{ last_order_instance_consideration.get_absoulute_url }}"> {{ last_order_instance_consideration.title }} </a> </i>
+            </span>
+            <span class="text-nowrap">Последнее</span>  
+            {% else %}
+            <span class="text-success mr-2"> <i class="mdi mdi-arrow-up-bold"> Распоряжений на рассмотрение нету. </i></span> 
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 mb-2"> 
+        <div class="card">
+          <h5 class="card-header"><a href="{% url 'orders' %}">Распоряжения</a> <br/> одобренные</h5>
+          <div class="card-body">
+            <h3 class="card-title">Количество: {{ num_order_instance_allow }}</h3>
+            <p class="card-text mb-0 text-muted">
+              <span class="text-success mr-2">
+              {% if last_order_instance_allow %}
+                <i class="mdi mdi-arrow-up-bold"><a href="{{ last_order_instance_allow.get_absoulute_url }}"> {{ last_order_instance_allow.title }} </a> </i>
+                </span>
+                <span class="text-nowrap">Последнее</span>  
+              {% else %}
+                <span class="text-success mr-2"> <i class="mdi mdi-arrow-up-bold"> Распоряжений на процессе нету. </i></span> 
+              {% endif %}
+            </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 mb-2"> 
+        <div class="card">
+          <h5 class="card-header"><a href="{% url 'orders' %}">Распоряжения</a> <br/> неодобренные</h5>
+          <div class="card-body">
+            <h3 class="card-title">Количество: {{ num_order_instance_disallow }}</h3>
+            <p class="card-text mb-0 text-muted">
+              <span class="text-success mr-2">
+              {% if last_order_instance_disallow %}
+                <i class="mdi mdi-arrow-up-bold"><a href="{{ last_order_instance_disallow.get_absoulute_url }}"> {{ last_order_instance_disallow.title }} </a> </i>
+                </span>
+                <span class="text-nowrap">Последнее</span>  
+              {% else %}
+                <span class="text-success mr-2"> <i class="mdi mdi-arrow-up-bold"> Распоряжений на процессе нету. </i></span> 
+              {% endif %}
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Dashboard Cards-->
+{% endblock %}

@@ -1,0 +1,106 @@
+/* Connection Font Icons */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url("fonts/fontawesome-webfont.eot");
+    src: url("fonts/fontawesome-webfont.eot") format("embedded-opentype"), 
+    url("fonts/fontawesome-webfont.woff2") format("woff2"), 
+    url("fonts/fontawesome-webfont.woff") format("woff"),
+    url("fonts/fontawesome-webfont.ttf") format("truetype"), 
+    url("fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
+    font-weight: 400;
+    font-style: normal; 
+}
+  
+@font-face {
+    font-family: 'PTSans-Bold';
+    src: url("fonts/PTSans-Bold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; 
+}
+
+@font-face {
+    font-family: 'PTSans-Regular';
+    src: url("fonts/PTSans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'AmericanCaptain';
+    src: url("fonts/AmericanCaptain.eot");
+    src: url("fonts/AmericanCaptain.eot?#iefix") format("embedded-opentype"), 
+    url("fonts/AmericanCaptain.woff") format("woff"), 
+    url("fonts/AmericanCaptain.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'FuturaDemi';
+    src: url("fonts/FuturaDemiC.eot");
+    src: url("fonts/FuturaDemiC.eot?#iefix") format("embedded-opentype"), 
+    url("fonts/FuturaDemiC.woff") format("woff"), 
+    url("fonts/FuturaDemiC.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'FuturaReg';
+    src: url("fonts/FuturaLightC.eot");
+    src: url("fonts/FuturaLightC.eot?#iefix") format("embedded-opentype"), 
+    url("fonts/FuturaLightC.woff") format("woff"), 
+    url("fonts/FuturaLightC.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+/* Icons */
+.col--location, .col--whatsapp, .col--phone,
+.col--email, .col--time, .col--inst, .col--fb,
+.col--vk, .col--pdf, .col--caret-down, .col--caret-up {
+    position: relative;
+    padding-left: 20px; }
+
+.col--location:after, .col--whatsapp:after,
+.col--phone:after, .col--email:after, .col--time:after,
+.col--inst:after, .col--fb:after, .col--vk:after, .col--pdf:after,
+.col--caret-down:after, .col--caret-up:after {
+    content: '';
+    font-family: 'fontAwesome';
+    font-size: 16px;
+    color: #80b50b;
+    position: absolute;
+    top: 0px;
+    left: 0; }
+
+.col--location:after {
+    content: '\f041';
+    top: 0px; }
+
+.col--phone:after {
+    content: '\f095';
+    top: 2px; }
+
+.col--email:after {
+    content: '\f0e0';
+    font-size: 12px;
+    top: 2px; }
+
+body .col--whatsapp:after {
+    font-size: 48px;
+    left: 16px; top: 8px;   
+    color: rgb(255, 255, 255);
+}
+
+main .col--pdf:after,
+.col--caret-up:after, .col--caret-down:after {
+    font-size: 48px;
+    left: 16px; top: 4px;
+    color: #fff;
+}
+
+.col--whatsapp:after { content: '\f232'; }
+.col--time:after { content: '\f017'; }
+.col--inst:after { content: '\f16d'; }
+.col--fb:after { content: '\f09a'; }
+.col--vk:after { content: '\f189'; }
+.col--pdf:after { content: '\f1c1';}
+.col--caret-up:after { content: '\f0d8';}
+.col--caret-down:after { content: '\f0d7';}

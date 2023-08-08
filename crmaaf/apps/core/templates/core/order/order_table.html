@@ -1,0 +1,56 @@
+{% load static %}    
+{% load tags %}
+
+<table class="table table-bordered table-sm text-center">
+
+    <thead>
+        <tr class="thead-light">
+        <th width="1%"> № </th>
+        <th width="14%"> Номер док.</th>
+        <th width="15%"> Название </th>
+        <th width="15%"> Дата</th>
+        <th width="15%"> Исполнитель </th>
+        <th width="15%"> Статус </th>
+        <th width="10%"> Тип </th>
+        {% if perms.core.add_order %} <th width="10%">Действия</th> {% endif %}
+    </thead>
+
+    <tbody>
+      {% for i in object_list %}
+      <tr class="url_table_row move_to_detail_page get_order
+        {% for j in i.order_execution_user_time_by.all %}
+          {% if user == j.user and j.got_order %} 
+            got_order 
+          {% elif not user == j.user and j.got_order and not i.status == 'p' %} 
+            got_order
+          {% endif %}
+        {% endfor %}" data-form-url="{{ i.get_absoulute_url }}" role="button">
+          <td><strong>{{ forloop.counter }}</strong></td>
+          <td>№0{{ i.id_document }}{{ i.type_order|upper }}</td>
+          <td>{{ i.title }}</td>
+          <td>{{ i.due_back }}</td>
+          <td>{{ i.display_created_by }}</td>
+          <td>{{ i.get_status_display }}</td>
+          <td>{{ i.get_type_order_display }}</td>
+          {% if perms.core.add_order %} 
+          <td class="action">
+              {% if i.status == 'p' %}
+              <button type="button" class="modal-form btn btn btn-link" data-form-url="{% url 'order_update' i.pk %}">
+                  <img src="{% static 'img/icon_editable.svg' %}" />
+              </button>
+              {% endif %}
+              <button type="button" class="modal-form btn btn btn-link" data-form-url="{% url 'order_delete' i.pk %}">
+                  <img src="{% static 'img/icon_crosshair.svg' %}" />
+              </button>
+          </td>
+          {% endif %}
+      </tr>
+      {% empty %}
+        <tr>
+          <td colspan="{% if perms.core.add_order %}7{% else %}6{% endif %}">Нет данных</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+  

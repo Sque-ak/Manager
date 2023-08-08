@@ -1,0 +1,42 @@
+{% load static %}
+<div class="row">
+{% for i in transport %}
+
+    <!-- Header card -->
+    <div class="col-md-6 mb-2"> 
+      <div class="card">
+
+        <div class="card-header d-flex justify-content-between">
+          <div>
+            <h5><strong>{{i.name}}</strong></h5>
+          </div>
+          <div>
+            {% if perms.core.add_order %} 
+            <button type="button" class="modal-form btn btn-link" data-form-url="{% url 'transport_update' i.pk %}">
+              <img src="{% static 'img/icon_editable.svg' %}" />
+            </button>
+
+            <button type="button" class="modal-form btn btn-link" data-form-url="{% url 'transport_delete' i.pk %}">
+              <img src="{% static 'img/icon_crosshair.svg' %}" />
+            </button>
+            {% endif %} 
+          </div>
+        </div>
+
+        <!-- Body card -->
+        <div class="card-body">
+          {% if i.controlling_transport.all %}
+            Список контролирующих:
+            {% for j in i.controlling_transport.all %}
+              <strong> {{ j.get_full_name }}; </strong>
+            {% endfor %}
+          {% else %}
+            Список контролирующих пуст
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+     
+{% endfor %}
+</div>

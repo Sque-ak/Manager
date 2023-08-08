@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-30 15:04+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:15
+#: .\crmaaf\apps\aaf\templates\shareholder.html:16
+#: .\crmaaf\apps\aaf\templates\shareholder.html:17
+#: .\crmaaf\apps\aaf\templates\shareholder.html:18
+#: .\crmaaf\apps\aaf\templates\shareholder.html:19
+#: .\crmaaf\apps\aaf\templates\shareholder.html:20
+#: .\crmaaf\apps\aaf\templates\shareholder.html:25
+#: .\crmaaf\apps\aaf\templates\shareholder.html:63
+#: .\crmaaf\apps\aaf\templates\shareholder.html:363
+#: .\crmaaf\apps\aaf\templates\shareholder.html:853
+#: .\crmaaf\apps\aaf\templates\shareholder.html:1489
+msgid "ForShareholder"
+msgstr "Акционерам"
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:15
+#: .\crmaaf\apps\aaf\templates\shareholder.html:16
+#: .\crmaaf\apps\aaf\templates\shareholder.html:17
+#: .\crmaaf\apps\aaf\templates\shareholder.html:18
+#: .\crmaaf\apps\aaf\templates\shareholder.html:19
+#: .\crmaaf\apps\aaf\templates\shareholder.html:20
+#: .\crmaaf\apps\aaf\templates\shareholder.html:25
+#: .\crmaaf\apps\aaf\templates\shareholder.html:63
+#: .\crmaaf\apps\aaf\templates\shareholder.html:363
+#: .\crmaaf\apps\aaf\templates\shareholder.html:853
+#: .\crmaaf\apps\aaf\templates\shareholder.html:1489
+msgid "year"
+msgstr ""
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:26
+msgid ""
+"\n"
+"        <p><strong>09 января 2023г. Информация о решениях, принятых "
+"внеочередным общим собранием акционеров акционерного общества &laquo;"
+"АзияАгроФуд&raquo;</strong></p>\n"
+"            \n"
+"        <p><strong> 1) дата, время и место проведения внеочередного общего "
+"собрания акционеров акционерного общества</strong>: 09 января 2023 года "
+"начало: &laquo;10&raquo; часов &laquo;00&raquo; минут местного времени, г. "
+"Алматы&nbsp; окончание: &laquo;11&raquo; часов &laquo;00&raquo; минут "
+"местного времени, г. Алматы&nbsp; по адресу РК, Алматинская область, "
+"Карасайский район, сельский округ Жібек Жолы, село Жібек Жолы, улица "
+"Сүйінбай, строение 1. </p>\n"
+"        \n"
+"        <strong> 2) вопросы, включенные в повестку дня внеочередного общего "
+"собрания акционеров:</strong> </br>\n"
+"        <ol>\n"
+"            1. Утверждение повестки дня собрания. <br/>\n"
+"            2. О внесении изменений в состав Совета директоров АО &laquo;"
+"АзияАгроФуд&raquo; <br/><br/>\n"
+"        </ol>\n"
+"\n"
+"        <div class=\"question-box\">\n"
+"            <strong><u>По вопросу 1.</u></strong><br/>\n"
+"            Итоги голосования: &laquo;За&raquo; &mdash; 6 854 991 голосов. "
+"&laquo;Против&raquo; &mdash; нет. &laquo;Воздержалось&raquo; &mdash; нет.<br/"
+"><br/>\n"
+"        </div>\n"
+"\n"
+"        <div class=\"answer-box\">\n"
+"            <strong><u>Принятое решение:</u></strong><br/>\n"
+"            Утвердить Повестку дня внеочередного общего собрания акционеров:"
+"<br/>\n"
+"            <ol>\n"
+"            1. Утверждение повестки дня собрания. <br/>\n"
+"            2. О внесении изменений в состав Совета директоров АО &laquo;"
+"АзияАгроФуд&raquo; <br/><br/>\n"
+"            </ol>\n"
+"        </div>\n"
+"        \n"
+"        <div class=\"question-box\">\n"
+"        <strong><u>По вопросу 2.&nbsp;</u></strong><br/>\n"
+"        Итоги голосования: &laquo;За&raquo; &mdash; 6 854 991 голосов. "
+"&laquo;Против&raquo; &mdash; нет. &laquo;Воздержалось&raquo; &mdash; нет."
+"&nbsp;<br/><br/>\n"
+"        </div>\n"
+"        <div class=\"answer-box\">\n"
+"        <strong><u>Принятое решение:</u></strong><br/>\n"
+"        Внести изменения в состав Совета директоров АО &laquo;"
+"АзияАгроФуд&raquo;<br/><br/>\n"
+"        </div>\n"
+"        "
+msgstr ""
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:1490
+msgid ""
+"18.02.2019г. Информация о решениях, принятых внеочередным общим собранием "
+"акционеров акционерного общества «АзияАгроФуд»"
+msgstr ""
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:1682
+msgid "Контакты"
+msgstr ""
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:1689
+msgid "График работы:"
+msgstr ""
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:1690
+msgid "Пн‑Пт:"
+msgstr ""
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:1691
+msgid "Сб‑Вс: выходной"
+msgstr ""
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:1698
+msgid "Адрес"
+msgstr ""
+
+#: .\crmaaf\apps\aaf\templates\shareholder.html:1699
+msgid ""
+"Республика Казахстан, Карасайский район, Алматинская область, с. Жибек Жолы, "
+"ул. Суюнбая, 1"
+msgstr ""

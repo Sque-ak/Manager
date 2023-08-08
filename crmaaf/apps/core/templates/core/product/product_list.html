@@ -1,0 +1,37 @@
+{% extends "base_generic.html" %}
+
+{% block subtitle %}
+// Продукция
+{% endblock %}
+
+{% block content %}
+
+    <!-- SubMenu -->
+    <div class="navbar navbar-light bg-light border shadow-sm mb-2">
+
+      <div>
+        <div class="btn-group mr-2">
+          {% if perms.core.add_order %}
+              <button type="button" class="modal-form btn btn-primary" 
+                      data-form-url="{% url 'product_create' %}" name="button">
+                        Добавить Продукт
+              </button>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+
+  {% include "core/form/modal_form.html" %}
+
+  <h3 class="text-justify">Список Продуктов</h3>
+  <br/>
+
+  <!-- Table-->
+  {% if product %}
+      {% include "core/product/product_table.html" %}
+  {% else %}
+    <p>Список продуктов пуст</p>
+  {% endif %}  
+
+{% endblock %}

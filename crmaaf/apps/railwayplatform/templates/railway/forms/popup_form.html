@@ -1,0 +1,12 @@
+{% load widget_tweaks %}
+
+
+<div class = "container">
+	<h1 >Форма</h1>
+	<form method = 'POST' action= '' enctype = "multipart/form-data" novalidate id = "address-form">
+		{% csrf_token %}
+		{{form.name.label_tag}}
+		{% render_field form.name size="64" %}
+		<button type="submit">Сохранить</button>
+	</form>
+</div>

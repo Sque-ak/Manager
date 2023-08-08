@@ -1,0 +1,25 @@
+  {% extends "base_generic.html" %}
+
+  {% block content %}
+  <div id="print" class="body-print">
+  <!-- Submenu -->
+   <div class="navbar navbar-light bg-light border shadow-sm mb-2 mt-4">
+
+    <div class="mr-2">
+      <button type="button" class="btn btn-dark" onclick="location.href='{% url 'order_detail' orders_detail.pk %}'">Назад</button>
+    </div>
+
+    <button class="btn btn-dark" onclick="window.print()">Распечатать</button>
+
+  </div>
+  <!-- SubMenu -->
+  
+  <div id="print" class="text-center">
+    {% include "core/order/order_detail_table.html" %}
+  </div>
+
+  <div id="print" class="footer-print mt-3">
+    {% include "core/order/order_detail_controlling_logic.html" %}
+  </div>
+
+{% endblock %}

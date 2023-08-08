@@ -1,0 +1,58 @@
+{% load static %}
+<div class="row">
+{% for i in company %}
+
+    <div class="col-md-6 mb-2"> 
+      <div class="card">
+
+        <!-- Header Card -->
+        <div class="card-header d-flex justify-content-between">
+
+          <div>
+            <h5><strong>{{i.name}}</strong></h5>
+          </div>
+
+          <div>
+            {% if perms.core.add_order %}
+
+            <button type="button" class="modal-form btn btn-link" data-form-url="{% url 'company_update' i.pk %}">
+              <img src="{% static 'img/icon_editable.svg' %}" />
+            </button>
+
+            <button type="button" class="modal-form btn btn-link" data-form-url="{% url 'company_delete' i.pk %}">
+              <img src="{% static 'img/icon_crosshair.svg' %}" />
+            </button>
+
+            {% endif %} 
+          </div>
+
+        </div>
+
+        <!-- Body Card -->
+        <div class="card-body">
+          <p class="card-title text-muted">
+            {% if i.contact_phone %} 
+              Контакт: {{i.contact_name}}  \\ Тел. {{i.contact_phone}} 
+            {% endif %} 
+          </p>
+
+          <h5 class="card-text mb-0">
+            {{i.note}}
+          </h5>
+
+          <span class="text-nowrap text-muted"> 
+            {% if i.contact_phone %} 
+              Почта: {{i.contact_email}} 
+            {% endif %}
+          </span> 
+
+          {% if not i.contact_phone and not i.contact_name and not i.contact_email and not i.note %}
+            <p class="text-muted"> Контактная информация отсутствует </p>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+     
+{% endfor %}
+</div>

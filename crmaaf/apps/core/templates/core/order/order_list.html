@@ -1,0 +1,99 @@
+{% extends "base_generic.html" %}
+{% load widget_tweaks %}
+
+{% block subtitle %}
+// Распоряжения
+{% endblock %}
+
+{% block content %}
+
+  {% include "core/form/modal_form.html" %}
+
+  <h3 class="text-justify">Распоряжение на отгрузку готовой продукции</h3>
+  <br/>
+
+<form method="get">
+      <div class="navbar-light bg-light border shadow-sm mb-2 p-4">
+        <h5>Сортировка</h5>
+        <h4>По параметрам:</h4>
+        <div class="row">
+          <div class="form-group col-sm-4 col-md-3">
+            {{ order_filter.form.title.label_tag }}
+            {% render_field order_filter.form.title class="form-control" %}
+          </div>
+          <div class="form-group col-sm-4 col-md-3">
+            {{ order_filter.form.due_back.label_tag }}
+            {% render_field order_filter.form.due_back class="form-control" %}
+          </div>
+          <div class="form-group col-sm-4 col-md-3">
+            {{ order_filter.form.status.label_tag }}
+            {% render_field order_filter.form.status class="form-control" %}
+          </div>
+          <div class="form-group col-sm-4 col-md-3">
+            {{ order_filter.form.type_order.label_tag }}
+            {% render_field order_filter.form.type_order class="form-control" %}
+          </div>
+          <div class="form-group col-sm-4 col-md-3">
+            {{ order_filter.form.id_document.label_tag }}
+            {% render_field order_filter.form.id_document class="form-control" %}
+          </div>
+        </div>
+        <div id="dateperiod" class="hidden">
+          <h4>По периоду:</h4>
+          <div class="row">
+            <div class="form-group col-sm-4 col-md-3">
+              {{ order_filter.form.dateperiod_day_start.label_tag }}
+              {% render_field order_filter.form.dateperiod_day_start class="form-control" %}
+            </div>
+            <div class="form-group col-sm-4 col-md-3">
+              {{ order_filter.form.dateperiod_day_end.label_tag }}
+              {% render_field order_filter.form.dateperiod_day_end class="form-control" %}
+            </div>
+
+            <div class="form-group col-sm-4 col-md-3">
+              {{ order_filter.form.dateperiod_month_start.label_tag }}
+              {% render_field order_filter.form.dateperiod_month_start class="form-control" %}
+            </div>
+            <div class="form-group col-sm-4 col-md-3">
+              {{ order_filter.form.dateperiod_month_end.label_tag }}
+              {% render_field order_filter.form.dateperiod_month_end class="form-control" %}
+            </div>
+
+            <div class="form-group col-sm-4 col-md-3">
+              {{ order_filter.form.dateperiod_year_start.label_tag }}
+              {% render_field order_filter.form.dateperiod_year_start class="form-control" %}
+            </div>
+            <div class="form-group col-sm-4 col-md-3">
+              {{ order_filter.form.dateperiod_year_end.label_tag }}
+              {% render_field order_filter.form.dateperiod_year_end class="form-control" %}
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary mb-2" id="dateperiod_button" type="button"> Период ▷ </button>
+
+    <div class="d-flex justify-content-between">
+      <div> 
+
+        <button type="submit" class="btn btn-primary">Поиск</button>
+
+        {% if perms.core.add_order %}
+            <button type="button" class="modal-form btn btn-primary" 
+                    data-form-url="{% url 'order_create' %}" name="button">
+                      Создать распоряжение
+            </button>
+        {% endif %}
+      </div>
+
+      <div>
+        <button type="button" class="btn" value="Refresh" onclick="history.go(0)">
+          <span aria-hidden="true"> &#8634;  </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {% include "core/order/order_table.html" %}
+
+</form>
+{% endblock %}

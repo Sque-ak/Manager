@@ -1,0 +1,118 @@
+/* Connection Font Icons */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url("fonts/fontawesome-webfont.eot");
+    src: url("fonts/fontawesome-webfont.eot") format("embedded-opentype"), 
+    url("fonts/fontawesome-webfont.woff2") format("woff2"), 
+    url("fonts/fontawesome-webfont.woff") format("woff"),
+    url("fonts/fontawesome-webfont.ttf") format("truetype"), 
+    url("fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
+    font-weight: 400;
+    font-style: normal; 
+}
+  
+@font-face {
+    font-family: 'PTSans-Bold';
+    src: url("fonts/PTSans-Bold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; 
+}
+
+@font-face {
+    font-family: 'PTSans-Regular';
+    src: url("fonts/PTSans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'AmericanCaptain';
+    src: url("fonts/AmericanCaptain.eot");
+    src: url("fonts/AmericanCaptain.eot?#iefix") format("embedded-opentype"), 
+    url("fonts/AmericanCaptain.woff") format("woff"), 
+    url("fonts/AmericanCaptain.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'FuturaDemi';
+    src: url("fonts/FuturaDemiC.eot");
+    src: url("fonts/FuturaDemiC.eot?#iefix") format("embedded-opentype"), 
+    url("fonts/FuturaDemiC.woff") format("woff"), 
+    url("fonts/FuturaDemiC.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'FuturaReg';
+    src: url("fonts/FuturaLightC.eot");
+    src: url("fonts/FuturaLightC.eot?#iefix") format("embedded-opentype"), 
+    url("fonts/FuturaLightC.woff") format("woff"), 
+    url("fonts/FuturaLightC.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url("fonts/montserrat/Montserrat-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: url("fonts/montserrat/Montserrat-Medium.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url("fonts/montserrat/Montserrat-Light.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url("fonts/montserrat/Montserrat-Bold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; }
+
+/* Icons */
+.col--location, .col--whatsapp, .col--phone, .col--globe,
+.col--email, .col--time, .col--inst, .col--fb,
+.col--vk, .col--pdf, .col--arrow-up, .col--arrow-down, .col--bars, .col--close,
+.col--caret-up, .col--caret-down {
+    position: relative;
+}
+.col--location:after, .col--whatsapp:after, .col--globe,
+.col--phone:after, .col--email:after, .col--time:after,
+.col--inst:after, .col--fb:after, .col--vk:after, .col--pdf:after,
+.col--arrow-up:after, .col--arrow-down:after, .col--bars:after, .col--close:after, .col--caret-up:after, .col--caret-down:after {
+    font-family: 'fontAwesome';
+    font-size: 32px;
+}
+
+.col--bars:after {content: "\f0c9";}
+.col--arrow-up:after {content: '\f0d8';}
+.col--arrow-down:after {content: '\f0d7';}
+.col--location:after { content: '\f041';}
+.col--phone:after { content: '\f095';}
+.col--email:after { content: '\f0e0';}
+.col--whatsapp:after { content: '\f232';}
+.col--time:after { content: '\f017'; }
+.col--inst:after { content: '\f16d'; }
+.col--fb:after { content: '\f09a'; }
+.col--vk:after { content: '\f189'; }
+.col--pdf:after { content: '\f1c1';}
+.col--close:after { content: '\f00d';} 
+.col--caret-up:after { content: '\f0d8';}
+.col--caret-down:after { content: '\f0d7';}
+.col--globe:after { content: '\f0ac';}
+
+.col--arrow-down-2 {
+    border: solid;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin-bottom: 2px;
+}

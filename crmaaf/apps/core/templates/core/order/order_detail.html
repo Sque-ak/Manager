@@ -1,0 +1,53 @@
+{% extends "base_generic.html" %}
+
+
+{% block subtitle %}
+ // {{ orders_detail.title }}
+{% endblock %}
+
+{% block content %}
+
+{% load tags %}
+
+  <!-- Menu for users -->
+  <div class="navbar navbar-light bg-light border shadow-sm mb-2">
+
+    <div class="mr-2">
+
+      <button type="button" class="btn btn-dark" onclick="location.href='{% url 'orders' %}'">Назад</button>
+
+      <div class="btn-group">
+        {% for i in orders_detail.controlling.all %}
+          {% if perms.core.sign_order and user == i and orders_detail.status != 'p'%} <!-- if order's status equals "For consideration" then show that buttons. -->
+            <button type="button" class="btn btn-primary" onclick="location.href='{% url 'allow_order' orders_detail.pk %}';"> {% if request.user|has_group:'BOSS' %} Согласовано {% else %} Исполненно {% endif %}</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'disallow_order' orders_detail.pk %}';">Отказать</button>
+          {% endif %}
+        {% endfor %}
+
+        {% if perms.core.change_order and orders_detail.status != 'a' and orders_detail.status != 'd'%} 
+          {% if orders_detail.status == 'p' or orders_detail.status == 'w' %}
+            <button type="button" class="modal-form btn btn-primary" data-form-url="{% url 'in_order_create' orders_detail.pk %}" name="button">Добавить поле</button>
+          {% endif %}
+        {% endif %}
+
+        {% if perms.core.change_order and orders_detail.status == 'p' %} <!-- Sent that order all controlling people. -->
+            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'in_order_send' orders_detail.pk %}'">Отправить</button>
+        {% endif %}
+      </div>
+    </div>
+
+    <button class="btn" onclick="location.href='{% url 'order_detail_print' orders_detail.pk %}'"> <!-- Print page button-->
+      {% load static %}
+      <img src="{% static 'img/icon_print.svg' %}" />
+    </button>
+
+  </div>
+
+  <!-- Other elements -->
+  {% include "core/form/modal_form.html" %} 
+
+  {% include "core/order/order_detail_table.html" %}
+
+  {% include "core/order/order_detail_controlling_logic.html" %}
+
+{% endblock %}

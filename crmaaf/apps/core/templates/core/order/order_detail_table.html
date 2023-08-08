@@ -1,0 +1,75 @@
+  <div class="d-flex justify-content-around align-items-center text-center pt-2 pb-2">
+    <div class = "font-weight-bold">
+      Акционерное общество<br/>
+      «АзияАгроФуд»
+    </div>
+
+    <div>
+      {% load static %}
+      <img src="{% static "img/favicon.ico" %}" width="64" height="80" viewBox="0 0 64 80">
+    </div>
+
+    <div class="font-weight-bold">
+      «АзияАгроФуд»<br/>
+      Акционерлік қоғамы
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center text-center pt-5 pb-2">
+    <div>
+      Распоряжение на отгрузку готовой продукции<br/>
+      <strong> №0{{ orders_detail.id_document }}{{ orders_detail.type_order|upper }} </strong> от <strong> {{ orders_detail.due_back }} </strong>
+    </div>
+  </div>
+
+  {% load static %}
+  <table class="table table-bordered table-striped table-sm text-center">
+    <thead>
+      <tr class="thead-light">
+      <th width="1%"> № </th>
+      <th width="15%"> Получатель </th>
+      <th width="22%"> Наименование товара, код</th>
+      <th width="12%"> Дата отгрузки </th>
+      <th width="10%"> Вес нетто, кг </th>
+      <th width="15%"> Вид и количество транспорта </th>
+      <th width="15%"> Примечание </th>
+      {% if perms.core.add_order%}
+        {% if orders_detail.status == 'p' or orders_detail.status == 'w' %}
+          <th class="align-middle remove_on_print" width="20%">Действия</th>
+        {% endif%} 
+      {% endif %}
+    </thead>
+    <tbody>
+    {% for orders in orders_detail.orderInstanceBy.all %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td><a href="{% url 'company'  %}">{{ orders.company }}</a></td>
+          <td>{{ orders.products.all|join:", " }}</td>
+          <td>{{ orders.date_of_shipment|date:'d.m.Y' }}</td>
+          <td>{{ orders.net_weight }}</td>
+          <td>{{ orders.transport_order.name }} {% if orders.transport_number  %} {{orders.transport_number}} шт. {% endif %} </td>
+          <td>{{ orders.note}}</td>
+          {% if perms.core.add_order %}
+            {% if orders_detail.status == 'p' or orders_detail.status == 'w' %}
+              <td class="remove_on_print">
+      
+                <button type="button" class="modal-form btn btn-link" data-form-url="{% url 'in_order_update' orders.id %}"  name="button">
+                  <img src="{% static 'img/icon_editable.svg' %}" />
+                </button>
+                
+                <button type="button" class="modal-form btn btn-link" data-form-url="{% url 'in_order_delete' orders.id %}" name="button">
+                  <img src="{% static 'img/icon_crosshair.svg' %}" />
+                </button>
+
+              </td>
+            {% endif %}
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot class="p-3 mb-2 bg-light text-muted border-top border-bottom">
+      <tr>
+        <td colspan="{% if perms.core.add_order %}8{% else %}7{% endif %}">{% if orders_detail.shipment_by %} <strong> Отгрузка от {{orders_detail.shipment_by.name}} </strong> {% endif %} </td>
+      </tr>
+    </tfoot>
+  </table>

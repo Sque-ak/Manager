@@ -1,0 +1,77 @@
+html, body {
+    height: 95%;
+}
+
+@page { 
+    size: auto;  
+    margin: 0mm;
+}
+
+#login_field {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+    
+#print {
+    margin: 15mm 5mm 5mm 5mm;
+}
+
+#print th, #print td {
+    border: 1px solid black;
+    color: black;
+    font-size: 14px;
+    background: white;
+}
+
+#print .title-print, #print .subtitle-print, #print.footer-print, #print .font-weight-bold, #print div {
+    color: black;
+    font-size: 16px;
+}
+
+#print img {
+    width: 120px;
+    height: 160px;
+}
+
+#print a, #print p, #print .text-primary {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+#print .remove_on_print {
+    display: none ;
+}
+
+td, th {
+    vertical-align: middle !important;
+}
+
+.get_order {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+.got_order {
+    background-color: #ffffff;
+    font-weight: normal;
+}
+
+.url_table_row:hover {
+    background: #007bff;
+    color: #fff; 
+    -webkit-transition: all 0.3s ease;;
+    -moz-transition: all 0.3s ease;;
+    -o-transition: all 0.3s ease;;
+    transition: all 0.3s ease;
+
+}
+
+.modal-xl {
+    max-width: 95% !important;
+}
+
+.hidden {
+    display:none;
+}

@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block login_content %}
+
+  {% if form.errors %}
+    <p>Логин или пароль неверный. Попробуйте еще раз.</p>
+  {% endif %}
+  
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>У вашей учетной записи нет доступа к этой стринце.</p>
+    {% else %}
+      <p>Войдите чтобы увидеть эту страницу.</p>
+    {% endif %}
+  {% endif %}
+  
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="d-flex flex-column pb-2">
+    {{ form.username.label_tag }}
+    {{ form.username }}
+
+    {{ form.password.label_tag }}
+    {{ form.password }}
+    </div>
+    <input class="btn btn-primary mt-3 mb-3" type="submit" value="Войти" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  
+  <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+  
+{% endblock %}

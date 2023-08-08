@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% block title %}<title>AsiaAgroFood JSC</title>{% endblock %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="{% static 'css/chart.min.css' %}">
+        <script src="{% static 'js/jquery-3.5.1.min.js'%}"></script>
+        <script src="{% static 'js/jquery-ui.min.js'%}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+        <script src="{% static 'js/chart.min.js' %}"></script>
+        <script src="{% static 'js/extra-logic.js'%}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/custom.styles.css' %}">
+        <link rel="shortcut icon" href={% static 'img/favicon.ico' %} type="image/x-icon">
+    </head>
+
+<body>    
+    <!-- Top bar with navbar and menu seciton.-->
+     {% if user.is_authenticated %}
+        {% if  request.resolver_match.url_name != 'order_detail_print' %}
+            <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm noprint">
+                <h5 class="my-0 mr-md-auto font-weight-normal  text-light">AsiaAgroFood JSC 
+                <small class="text-muted ">{% block subtitle %}{% endblock %}</small>
+                </h5>
+
+                    <!-- This is menu-->
+                    {% block navbar %}
+
+                    <nav class="my-2 my-md-0 mr-md-3 navbar-dark">
+                        <a class="btn p-2 text-light" href="{% url 'index' %}">Главная страница</a>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle text-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Документация
+                            </button>
+                            <div class="dropdown-menu">
+                                {% if perms.core.view_order %}
+                                    <a class="dropdown-item p-2 text-dark" href="{% url 'orders' %}">Распоряжения на отгрузку готовой продукции</a>
+                                {% endif %}
+                                {% if perms.railway.view_railwayorder %}
+                                    <a class="dropdown-item p-2 text-dark" href="{% url 'railway_order_page' %}">ЖД Документация</a>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% if perms.core.add_order %}
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle  text-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Реквизиты
+                            </button>
+                            <div class="dropdown-menu">
+                                {% if perms.core.view_company %}
+                                    <a class="dropdown-item p-2 text-dark" href="{% url 'company' %}">Компании</a>
+                                {% endif %}
+                                {% if perms.core.view_product %}
+                                    <a class="dropdown-item p-2 text-dark" href="{% url 'product' %}">Продукты</a>
+                                {% endif %}
+                                {% if perms.core.view_transport %}
+                                    <a class="dropdown-item p-2 text-dark" href="{% url 'transport' %}">Транспортировка</a>
+                                {% endif %}
+                                {% if perms.core.view_shipment %}
+                                    <a class="dropdown-item p-2 text-dark" href="{% url 'shipment' %}">Отгрузки</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </nav>
+                    {% endblock %}
+
+                    <medium class="pr-3 text-light"> <strong>  {{ user.last_name }} {{ user.first_name }} </strong> </medium>
+                    <div class="btn-toolbar">
+                        <a class="btn btn-primary mt-2" href="{% url 'logout'%}?next={% url 'login' %}?next={{request.path}}">Выйти</a> 
+                        {% if user.is_superuser %} <a class="btn btn-success mt-2 ml-2" href="/admin">Admin Panel</a> {% endif %}
+                    </div>
+            </header>
+        {% endif %}
+
+    <!-- Main section with content -->
+    <section>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+    
+            {% load tags %}
+            {% block pagination %}
+                {% if is_paginated %}
+                    {% if page_obj.has_previous %}
+                        <a href="?{% param_replace page=1 %}">Первая</a>
+                        {% if page_obj.previous_page_number != 1 %}
+                        <a href="?{% param_replace page=page_obj.previous_page_number %}">Предыдущая</a>
+                        {% endif %}
+                    {% endif %}
+
+                    Страница {{ page_obj.number }} из {{ paginator.num_pages }}
+
+                    {% if page_obj.has_next %}
+                        {% if page_obj.next_page_number != paginator.num_pages %}
+                        <a href="?{% param_replace page=page_obj.next_page_number %}">Следующая</a>
+                        {% endif %}
+                        <a href="?{% param_replace page=paginator.num_pages %}">Последняя</a>
+                    {% endif %}
+
+                    <p>Элементов {{ page_obj.start_index }}—{{ page_obj.end_index }}</p>
+                    {% endif %}
+            {% endblock %} 
+        </div>
+    </section>
+
+    {% if  request.resolver_match.url_name != 'order_detail_print' %}
+    <!-- Footer -->
+    <footer class="container noprint">
+        <div class="d-flex justify-content-between align-items-center text-center my-md-5 pt-md-5 border-top">
+            <div>
+                <medium class="d-block text-muted"><a href="http://asiaagrofood.kz">AsiaAgroFood JSC</a></medium>
+                <small class="d-block text-muted">© 2021 г. Все права защищены.</small>
+            </div>
+
+            <div>
+                <small class="d-block text-muted">Version 2</small>
+            </div>
+        </div>
+    </footer>
+    {% endif %}
+
+  <!-- Login -->
+  {% else %}
+
+    <div class="container" id="login_field">
+        <div class="d-flex align-items-center flex-column shadow p-3 mb-5 bg-white rounded border" >
+        
+            <h1 class = "font-weight-bold m-4"> АО «АзияАгроФуд»</h1>
+
+            <div>
+                {% block login_content%}
+                {% endblock%}
+            </div>
+
+        </div>
+    </div>
+  {% endif %}
+  <!-- Login -->
+</body>
+</html>

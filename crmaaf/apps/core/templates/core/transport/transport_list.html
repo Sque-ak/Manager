@@ -1,0 +1,37 @@
+{% extends "base_generic.html" %}
+
+{% block subtitle %}
+// Транспортировки
+{% endblock %}
+
+{% block content %}
+
+    <!-- SubMenu -->
+    <div class="navbar navbar-light bg-light border shadow-sm mb-2">
+
+      <div>
+        <div class="btn-group mr-2">
+          {% if perms.core.add_order %}
+              <button type="button" class="modal-form btn btn-primary" 
+                      data-form-url="{% url 'transport_create' %}" name="button">
+                        Добавить Транспорт
+              </button>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+
+  {% include "core/form/modal_form.html" %}
+
+  <h3 class="text-justify">Список Транспортов</h3>
+  <br/>
+
+  <!-- Table-->
+  {% if transport %}
+    {% include "core/transport/transport_table.html" %}
+  {% else %}
+    <p>Список транспортов пуст</p>
+  {% endif %}  
+
+{% endblock %}

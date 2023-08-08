@@ -1,0 +1,223 @@
+{% load widget_tweaks %}
+{% load static %}
+
+  <form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ recipient_formset.management_form }}
+    {{ sender_formset.management_form }}
+
+  
+  <div class="modal-header">
+      <h5 class="modal-title">ЖД Документ №{{ form.instance.id  }}</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-header">
+      <div>
+        Дата создания документа: <strong>{{ form.instance.date_of_created|date:'d.m.Y' }} </strong>
+      </div>  
+      <div>
+        Статус: <strong>{{ form.instance.get_type_railwayorder_display }}</strong>
+        <strong id="status_rw_order" style="display: none;">{{ form.instance.type_railwayorder }}</strong>
+      </div>
+      <div>
+        Исполнитель: <strong>{{ form.instance.created_by }}</strong>
+      </div>
+    </div>
+
+    {% for error in form.errors %}
+      {% if error %}
+        <div class="alert alert-danger  alert-dismissible fade show" role="alert">
+          <strong>Ошибка:</strong> {{ error }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endif %}
+    {% endfor %}
+    
+    <div class="modal-body">
+
+    <div class="row"> <!-- It's date. -->
+      <div class="col-4 col-md-4">
+        <div class="input-group {% if form.errors %} invalid{% endif %}">
+          <strong class="mr-2 mt-1"> {{ form.date_of_shipment.label_tag }} </strong>
+          {% if form.instance.type_railwayorder == 'p' %}
+            {% render_field form.date_of_shipment class="form-control" %}
+          {% else %}
+            {% render_field form.date_of_shipment class="form-control" readonly=true %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4"> <!-- These are shipper and address. -->
+      <div class="col-4 col-sm">
+        <div class="input-group {% if form.errors %} invalid{% endif %}">
+          <strong class="mr-2 mt-1"> {{ form.shipper.label_tag }} </strong>
+
+          {% if form.instance.type_railwayorder == 'p' %}
+            {% render_field form.shipper class="form-control" %} <br/>
+            <a href="{% url 'railway_shipper_create_page' %}" id="add_shipper" onclick="return showAddPopup(this);"><img src="{% static 'img/icon_add.svg' %}"/></a>
+            <a id="edit_shipper" style="cursor: pointer; cursor: hand;"><img src="{% static 'img/icon_editable.svg' %}"/></a>
+          {% else %}
+            {% render_field form.shipper class="form-control" %} <br/>
+          {% endif %}
+
+        </div>
+      </div>
+
+      <div class="col-4 col-sm">
+        <div class="input-group {% if form.errors %} invalid{% endif %}">
+          <strong class="mr-2 mt-1"> {{ form.address.label_tag }} </strong>
+
+          {% if form.instance.type_railwayorder == 'p' %}
+            {% render_field form.address class="form-control" %} <br/>
+            <a href="{% url 'railway_address_create_page' %}" id="add_address" onclick="return showAddPopup(this);"><img src="{% static 'img/icon_add.svg' %}"/></a>
+            <a id="edit_address" style="cursor: pointer; cursor: hand;"><img src="{% static 'img/icon_editable.svg' %}"/></a>
+          {% else %}
+            {% render_field form.address class="form-control" %} <br/>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row mt-4"> <!-- Table. -->
+      <div class="col-sm {% if sender_formset.errors %} invalid{% endif %}">
+          <table class="table table-bordered table-sm text-center table-striped table-sm">
+            {% if form.instance.type_railwayorder == 'p'%}
+                <thead class="thead-light">
+                    <tr>
+                      <td colspan="3" class="text-left" > <strong class="mr-2 mt-1"> Таблица </strong> </td>
+                      <td colspan="3"> <strong> Веса Отправителя </strong> </td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th width="10%"> № Накладной </th>
+                      <th width="15%"> № Вагона </th>
+                      <th width="25%">
+                         Поставщик 
+                         <a href="{% url 'railway_supplier_create_page' %}" id="add_supplier" onclick="return showAddPopup(this);"><img src="{% static 'img/icon_add.svg' %}"/></a>
+                        </th>
+                      <th> Брутто </th>
+                      <th> Тара </th>
+                      <th> Нетто </th>
+                      <th> Прочие </th>
+                      <th> Действия </th>
+                    </tr>
+                </thead>
+
+                <tbody id="parent-form">
+                    {% for add_items in sender_formset %}
+                          <tr class="item-form">
+                            <td>{% if add_items.instance.id %} №{{add_items.instance.id}} {% else %} Нету {% endif%}</td>
+                            <td>{% render_field add_items.number_of_wagon class="form-control" %}</td>
+                            <td>{% render_field add_items.supplier class="form-control" %}</td>
+                            <td>{% render_field add_items.sender_gross class="form-control" %}</td>
+                            <td>{% render_field add_items.sender_tara class="form-control" %}</td>
+                            <td>{% render_field add_items.sender_net class="form-control" %}</td>
+                            <td>{% render_field add_items.note class="form-control" style="height: 2.5em;" %}</td>
+                            <td>Удалить {{add_items.DELETE}}</td>
+                          </tr>
+                          {% for hidden in add_items.hidden_fields %}
+                            {{ hidden }}
+                          {% endfor %}
+                      {% endfor %}
+                </tbody>
+
+              {% else %}
+
+                <thead class="thead-light">
+                  <tr>
+                    <td colspan="3" class="text-left" > <strong class="mr-2 mt-1"> Таблица </strong> </td>
+                    <td colspan="3"> <strong> Веса Отправителя </strong> </td>
+                    <td colspan="3"> <strong> Веса Получателя </strong> </td>
+                  </tr>
+                  <tr>
+                    <th width="10%"> № Накладной </th>
+                    <th width="10%"> № Вагона </th>
+                    <th width="10%"> Поставщик </th>
+                    <th> Брутто </th>
+                    <th> Тара </th>
+                    <th> Нетто </th>
+                    <th> Брутто </th>
+                    <th> Тара </th>
+                    <th> Нетто </th>
+                    <th> Разница</th>
+                    <th> Прочие </th>
+                  </tr>
+              </thead>
+
+              <tbody id="parent-form">
+                {% for add_items in recipient_formset %}
+                        <tr class="item-form">
+                          <td>{% if add_items.instance.id %} №{{add_items.instance.id}} {% else %} Нету {% endif%}</td>
+                          <td>{% render_field add_items.instance.number_of_wagon %}</td>
+                          <td>{% render_field add_items.instance.supplier%}</td>
+                          <td>{% render_field add_items.instance.sender_gross %}</td>
+                          <td>{% render_field add_items.instance.sender_tara %}</td>
+                          <td>{% render_field add_items.instance.sender_net %}</td>
+                          <td>{% render_field add_items.rec_gross class="form-control" %}</td>
+                          <td>{% render_field add_items.rec_tara class="form-control" %}</td>
+                          <td>{% render_field add_items.rec_net class="form-control" %}</td>
+                          <td>{% render_field add_items.difference class="form-control" %}</td>
+                          <td>{% render_field add_items.note class="form-control" style="height: 2.5em;" %}</td>
+                        </tr>
+                        {% for hidden in add_items.hidden_fields %}
+                          {{ hidden }}
+                        {% endfor %}
+                    {% endfor %}
+
+                {% endif %}
+              </tbody>
+          </table>
+          {% if form.instance.type_railwayorder == 'p' %}
+            <button id="add-form" type="button" class="btn btn-primary float-right">Добавить строку</button>
+          {% endif %}
+      </div>
+    </div>
+
+
+    <div class="row mt-4"> <!-- These are note and attechment. -->
+      <div class="col-sm {% if form.errors %} invalid {% endif %}">
+            <strong class="mr-2 mt-1"> {{ form.note.label_tag }} </strong>
+            {% render_field form.note class="form-control" %} <br/>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-sm {% if form.errors %} invalid {% endif %}">
+            <strong class="mr-2 mt-1"> {{ form.attechment.label_tag }} </strong>
+            {% render_field form.attechment class="form-control" %} <br/>
+      </div>
+    </div>
+
+  </div>
+
+    <div class="d-flex justify-content-between modal-footer">
+      <div>
+        {% if form.instance.type_railwayorder != 'r' %}
+        <button type="button" class="submit-btn btn btn-primary" onclick="location.href='{% url 'railway_send_train' form.instance.pk %}';">
+          {% if form.instance.type_railwayorder == 'p' %}
+            Отправить
+          {% elif form.instance.type_railwayorder == 's' %}
+            Прибыл
+          {% endif %}
+        </button>
+        {% endif %}
+      </div>
+      <div>
+      {% if not form.instance.type_railwayorder == 'r' %}
+      <button type="button" class="submit-btn btn btn-primary">Сохранить</button>
+      {% endif %}
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+
+  </form>
+
+{% load static %}
+<script src="{% static 'railway/js/table-logic.js'%}"></script>

@@ -1,0 +1,295 @@
+{% extends "base_generic_s.html" %}
+
+
+{% block title %}
+АО «АзияАгроФуд» - крупнейший производитель и лидер в области производства комбикормов, кормовых добавок в Алматы, Казахстане.
+{% endblock %}
+{% block subtitle%}
+Лидер в области производства
+{% endblock%}
+
+{% block content %}
+{% load static %}
+
+
+<div class="popup-order" style="display: none;">
+    <div class="popup-order-content">
+        <form class="contact-form" action="" method="post">
+            {% csrf_token %}
+            <div>
+                <input id="name_user" type="text" name="name_user" value="{{ name_user }}" placeholder="Имя" aria-label="Имя" size="60" required>
+            </div>
+            <div>
+                <input id="phone_user" type="text" name="phone_user" value="{{ phone_user }}" placeholder="Номер телефона" size="60" aria-label="Номер телефона" required>
+            </div>
+            <div>
+                <textarea id="message_user" type="text" name="message_user" value="{{ message_user }}" placeholder="Сообщение" aria-label="Сообщение" size="60" required></textarea>
+            </div>
+            <div>
+                <input id="order_product" type="text" name="order_product" value="{{ order_product }}" placeholder="Продукт" aria-label="Продукт" size="60">
+            </div>
+            <div>
+                <input id="count_product" type="text" name="count_product" value="{{count_product }}" placeholder="Количество" aria-label="Количество" size="60">
+            </div>
+            <div class="captcha_block">
+                {{ form_product_contact.captcha }}
+            </div>
+            <div class="button-block">
+                
+                <input type="submit" value="Отправить" class="btn-black" name="order">
+                <a class="btn-black" style="text-align: center; cursor: pointer;" onclick="orderProductHide();">Отмена</a>
+            </div>
+        </form>
+        <a class="x-btn" style="cursor: pointer;" onclick="orderProductHide();">X</a>
+    </div>
+</div>
+
+<div class="popup-thanks" style="display: none;">
+    <div class="popup-order-content">
+            <p> АО "АзияАгроФуд" Благодарит Вас.<br/> Ваше сообщение, было отправлено нашим менеджерам, в ближайшее время они рассмотрят его и перезвонят Вам.</p>
+            <div class="button-block">
+                <a class="btn btn-black" id="close-popup" style="text-align: center;">Закрыть</a>
+            </div>
+        <a class="x-btn" id="close-popup" id="close-popup">X</a>
+    </div>
+</div>
+
+<section class="page-n1">
+    <div class="page-header-contiener">
+            <p class="txt-logo">AsiaAgroFood </p>
+            <strong class="txt-desc">Лидер в области производства комбикормов, муки и глюкозных сиропов в Казахстане</strong>
+    </div>
+</section>
+<section class="page-n2">
+    <div class="page-conteiner-3">
+        <div class="box-conteiner">
+            <div class="page-conteiner-1">
+                <strong style="font-size: 24px;"> О Компании </strong> <br/> <br/>
+                <div class="about_us">
+                    <strong>АО «ААФ»</strong> — лидер в области производства сиропов, комбикормов и хлебопекарной муки в Казахстане. <br/><br/>
+                    Основной деятельностью предприятия является переработка зерна пшеницы в муку и зерна кукурузы на глюкозные-мальтозные сиропы, так же имеется производство всех видов комбикормов. <br/><br/>
+                    Предприятие имеет в своем составе элеватор емкостью 15,2 тысяч тонн, мукомольный завод, крахмалопаточный завод, комбикормовый завод. Все цеха и производства оснащены новейшим, высокопроизводительным оборудованием, произведенным в Германии, Швейцарии, Италии и США.            
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-n3">
+
+    <div class="page-conteiner-2 product-title">
+        <div class="corn-pack-1 pack title-block">
+            <strong> Комбикормовое предприятие </strong>
+            <div class="desc-title corn-pack-1 pack">
+                <p class="desc-subtitle"><strong>АО «АзияАгроФуд»</strong> является крупнейшим производителем и лидером в области производства комбикормов, кормовых смесей, кормовых добавок, на базе собственного производственного комплекса.
+                    Вся наша продукция, произведенная и переработанная проходит <strong>строгий лабораторный контроль</strong> от сырья до готовой продукции.
+                </p>
+            </div>
+        </div>
+        <div class="corn-pack-2 pack title-block" style="max-width: 0; max-height: 0; opacity: 0; overflow: hidden;">
+            <strong> Паточное предприятие </strong> <br/>
+            <div class="desc-title">
+                <p class="desc-subtitle"><strong>АО «АзияАгроФуд»</strong> предлагает продажу Патоки крахмальной: Карамельной, Ферментативной, Низкосахаренной, Высокосахаренной, Мальтозной и имеется возможность выработать Патоку с показателями необходимыми для клиентов.  </p>
+            </div>
+        </div>
+        <div class="corn-pack-3 pack title-block" style="max-width: 0; max-height: 0; opacity: 0; overflow: hidden;">
+            <strong> Мукомольное предприятие </strong> <br/>
+            <div class="desc-title">
+                <p class="desc-subtitle"><strong>АО «АзияАгроФуд»</strong> предлагает продажу Муки: высшего сорта, первого сорта, сорта «Казахстан» и второго сорта произведенных из высококачественной пшеницы северных регионов Казахстана.  </p>
+            </div>
+        </div>
+        <div class="btn-group">
+            <a class="dot-corn dot-active" onclick="currentSlide(1, 'corn')">Комбикормовый завод</a>
+            <a class="dot-corn" onclick="currentSlide(2, 'corn')">Крахмало-паточный завод</a>
+            <a class="dot-corn" onclick="currentSlide(3, 'corn')">Мукомольный завод</a>
+        </div>
+    </div>
+    <div class="slider">
+        <div class="viewport">
+            <div class="corn-pack-1 pack">
+                <div class="slide-card" onclick="javascript:orderProductShow('Крупно рогатый скот');">
+                    <div class="slide-img-block">
+                        <img class="slide-logo" src="{% static 'css/img/slide/stern/kpc.png' %}" alt="KPC" width="425" height="250">
+                    </div>
+                    <div class="slide-desc">
+                        <strong class="desc-title-product"> Крупно рогатый скот комбикорм </strong>
+                        <p class="desc-subtitle">
+                            Правильно подобранный для крупного рогатого скота рацион – это залог здоровья и продуктивности животных. 
+                        </p>           
+                    </div> 
+                    <a href="javascript:orderProductShow('Крупно рогатый скот')" class="btn btn-black"> Заказать </a>                      
+                </div>
+                <div class="slide-card" onclick="javascript:orderProductShow('Птичий комбикорм');">
+                    <div class="slide-img-block">
+                        <img class="slide-logo" src="{% static 'css/img/slide/stern/birds.jpg' %}" alt="Комбикорм Для Птиц" width="425" height="250">
+                    </div>
+                    <div class="slide-desc">
+                        <strong class="desc-title-product"> Птичий комбикорм </strong>
+                        <p class="desc-subtitle">
+                            Высококачественные комбикорма для Птиц.
+                        </p>          
+                    </div> 
+                    <a href="javascript:orderProductShow('Птичий комбикорм')" class="btn btn-black"> Заказать </a>                        
+                </div>
+                <div class="slide-card" onclick="javascript:orderProductShow('Комбикорм для свиней');">
+                    <div class="slide-img-block">
+                        <img class="slide-logo" src="{% static 'css/img/slide/stern/pigs.jpg' %}" alt="Комбикорм для свиней" width="425" height="250">
+                    </div>
+                    <div class="slide-desc">
+                        <strong class="desc-title-product"> Комбикорм для свиней </strong>
+                        <p class="desc-subtitle">
+                            Комбикорм – основная составляющая рациона свиней, от которой зависит их здоровье, качество потомства и мяса.
+                        </p>
+                    </div> 
+                    <a href="javascript:orderProductShow('Комбикорм для свиней')" class="btn btn-black"> Заказать </a>                     
+                </div>
+            </div>
+
+                <div class="corn-pack-2 pack" style="max-width: 0; max-height: 0; opacity: 0; overflow: hidden;">
+                    <div class="slide-card" onclick="javascript:orderProductShow('Патока')">
+                        <div class="slide-img-block">
+                            <img class="slide-logo" src="{% static 'css/img/slide/stern/syrup.jpg' %}" alt="Патока" width="425" height="250">
+                        </div>
+                        <div class="slide-desc">
+                            <strong class="desc-title-product"> Глюкозный сироп  </strong>
+                            <p class="desc-subtitle">
+                                Продукт неполного кислотного или ферментативного гидролиза крахмала. Образуется как побочный продукт при производстве сахара и крахмала.
+                            </p>          
+                        </div> 
+                        <a href="javascript:orderProductShow('Патока')" class="btn btn-black"> Заказать </a>                       
+                    </div>
+                    <div class="slide-card" onclick="javascript:orderProductShow('Глютен');">
+                        <div class="slide-img-block">
+                            <img class="slide-logo" src="{% static 'css/img/slide/stern/gluten-corn.png' %}" alt="Глютен" width="425" height="250">
+                        </div>
+                        <div class="slide-desc">
+                            <strong class="desc-title-product"> Глютен </strong>
+                            <p class="desc-subtitle">
+                            Это побочный продукт переработки кукурузы, который исторически использовался в качестве корма для животных.
+                            </p>
+                        </div> 
+                        <a href="javascript:orderProductShow('Глютен')" class="btn btn-black"> Заказать </a>                     
+                    </div>
+                    <div class="slide-card" onclick="javascript:orderProductShow('Зародыш');">
+                        <div class="slide-img-block">
+                            <img class="slide-logo" src="{% static 'css/img/slide/stern/corn-germ.png' %}" alt="Зародыш" width="425" height="250">
+                        </div>
+                        <div class="slide-desc">
+                            <strong class="desc-title-product"> Зародыш </strong>
+                            <p class="desc-subtitle">
+                                Это отдельная часть кукурузного зерна (8-14% от общей массы), которая содержит в себе до 86% всего жира, содержащегося в кукурузе.
+                            </p>           
+                        </div> 
+                        <a href="javascript:orderProductShow('Зародыш')" class="btn btn-black"> Заказать </a>                      
+                    </div>
+                    <div class="slide-card" onclick="javascript:orderProductShow('Отруби Кукурузные');">
+                        <div class="slide-img-block">
+                            <img class="slide-logo" src="{% static 'css/img/slide/stern/otrubi_kuk.jpeg' %}" alt="Отруби Кукурузные" width="425" height="250">
+                        </div>
+                        <div class="slide-desc">
+                            <strong class="desc-title-product"> Отруби Кукурузные </strong>
+                            <p class="desc-subtitle">
+                                продукт, получаемый путем измельчения зерен кукурузы. Этот вид крупы считается одним из самых полезных.
+                            </p>
+                        </div> 
+                        <a href="javascript:orderProductShow('Отруби Кукурузные')" class="btn btn-black"> Заказать </a>                    
+                    </div>
+                </div>
+
+                <div class="corn-pack-3 pack" style="max-width: 0; max-height: 0; opacity: 0; overflow: hidden;">
+                    <div class="slide-card" onclick="javascript:orderProductShow('Мука пшеничная высшего, 1 и 2 сорта')">
+                        <div class="slide-img-block">
+                            <img class="slide-logo" src="{% static 'css/img/slide/stern/flour.jpg' %}" alt="Мука" width="425" height="250">
+                        </div>
+                        <div class="slide-desc">
+                            <strong class="desc-title-product"> Мука пшеничная высшего, 1 и 2 сорта </strong>
+                            <p class="desc-subtitle">
+                                Получаемая из зёрен пшеницы, самый популярный вид муки, применяемый для выпечки. 
+                            </p>           
+                        </div> 
+                        <a href="javascript:orderProductShow('Мука пшеничная высшего, 1 и 2 сорта')" class="btn btn-black"> Заказать </a>                                 
+                    </div>
+                    <div class="slide-card" onclick="javascript:orderProductShow('Отруби');">
+                        <div class="slide-img-block">
+                            <img class="slide-logo" src="{% static 'css/img/slide/stern/otrubi.jpg' %}" alt="Отруби" width="425" height="250">
+                        </div>
+                        <div class="slide-desc">
+                            <strong class="desc-title-product"> Отруби </strong>
+                            <p class="desc-subtitle">
+                                Побочный продукт мукомольного производства, представляющий собой твёрдую оболочку зерна
+                            </p>
+                        </div> 
+                        <a href="javascript:orderProductShow('Отруби')" class="btn btn-black"> Заказать </a>                     
+                    </div>
+                    <div class="slide-card" onclick="orderProductShow('Зерновые отходы пшеничные');">
+                        <div class="slide-img-block">
+                            <img class="slide-logo" src="{% static 'css/img/slide/stern/grain-waste.png' %}" alt="Зерновые отходы пшеничные" width="425" height="250">
+                        </div>
+                        <div class="slide-desc">
+                            <strong class="desc-title-product"> Зерновые отходы пшеничные </strong>
+                            <p class="desc-subtitle">
+                                Зерновые отходы образуются в результате очистки, сушки, хранении и переработки зерна.
+                            </p>          
+                        </div> 
+                        <a href="javascript:orderProductShow('Зерновые отходы пшеничные')" class="btn btn-black"> Заказать </a>                             
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+<section class="page-n4 page-to-10">
+    <div class="page-conteiner-3">
+        <div class="box-conteiner">
+            <div class="contacts_block">
+                <div class="box-conteiner">
+                    <div class="contacts_panel">
+                        <div class="contacts_cell">
+                            <strong style="font-size: 24px;" class="desc-subtitle"> Контакты </strong>
+                            <p> <a href="tel:+7 (727) 321 00 22"><span class="col--phone"></span>  +7 (727) 321-00-22</a></p>
+                            <p> <a href="mailto:aaf@aaf.kz"><span class="col--email"></span>  aaf@aaf.kz</a></p>
+                        </div>
+                    </div>
+                    <div class="contacts_panel">
+                        <div class="contacts_cell">
+                            <strong style="font-size: 24px;" class="desc-subtitle"> График работы: </strong>
+                            <p> Пн‑Пт: 9:00-18:00 </p>
+                            <p> Сб‑Вс: выходной </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts_panel">
+                    <div class="contacts_cell">
+                        <br/>
+                        <strong style="font-size: 24px;" class="desc-subtitle"> Адрес </strong>
+                        <p> <a href="//goo.gl/maps/M2t9eAZKzzfAQprV9" target="_blank"> <span class="col--location"></span>  Республика Казахстан, Карасайский район, Алматинская область, с. Жибек Жолы, ул. Суюнбая, 1 </a> </p>
+                    </div>
+                </div>
+                <br/>
+                <strong style="font-size: 24px;"> Связаться с нами </strong> <br/>
+                    <div class="contacts_block">
+                        <form class="contact-form" method="post">
+                            {% csrf_token %}
+                            <div>
+                                <input id="name_user" type="text" name="name_user" value="{{ name_user }}" placeholder="Имя" aria-label="Имя" required>
+                            </div>
+                            <div>
+                                <input id="phone_user" type="text" name="phone_user" value="{{ phone_user }}" placeholder="Номер телефона" aria-label="УкНомер телефона" required>
+                            </div>
+                            <div>
+                                <textarea id="message_user" type="text" name="message_user" value="{{ message_user }}" placeholder="Сообщение" aria-label="Сообщение" required></textarea>
+                            </div>
+                            <div class="button-block">
+                                {{ form_contact.captcha }}
+                                <input type="submit" value="Отправить" class="btn-blue" name="contact">
+                            </div>
+                        </form>
+                    </div>
+            </div>
+            <div class="map">
+                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A82ff7c8c2a81a4b64689ddf51f4f3a60347013aa36ba37a179f8ece2ceaed241&amp;width=100%25&amp;height=100%25&amp;border-radius=25px25&amp;lang=ru_RU&amp;scroll=true"></script>
+            </div>
+        </div>
+    </div> 
+</section>
+{% endblock %}

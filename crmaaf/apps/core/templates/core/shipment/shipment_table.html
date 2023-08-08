@@ -1,0 +1,27 @@
+{% load static %}
+<div class="row">
+{% for i in shipment %}
+
+    <div class="col-md-6 mb-2"> 
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <div>
+            <h5><strong>{{i.name}}</strong></h5>
+          </div>
+          <div>
+            {% if perms.core.add_order %} 
+            <button type="button" class="modal-form btn btn-link" data-form-url="{% url 'shipment_update' i.pk %}">
+              <img src="{% static 'img/icon_editable.svg' %}" />
+            </button>
+
+            <button type="button" class="modal-form btn btn-link" data-form-url="{% url 'shipment_delete' i.pk %}">
+              <img src="{% static 'img/icon_crosshair.svg' %}" />
+            </button>
+            {% endif %} 
+          </div>
+        </div>
+      </div>
+    </div>
+  
+{% endfor %}
+</div>

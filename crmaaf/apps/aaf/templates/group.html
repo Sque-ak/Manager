@@ -1,0 +1,48 @@
+{% extends "base_generic_s.html" %}
+
+{% block title %}
+АО «АзияАгроФуд» - крупнейший производитель и лидер в области производства комбикормов, кормовых добавок в Алматы, Казахстане.
+{% endblock %}
+{% block subtitle%}
+Главная → Группа компаний 
+{% endblock%}
+
+{% block content %}
+{% load static %}
+{% load i18n %}
+
+    <section class="indent-top-md container align-center-h .clear-margin-bottom">
+        <swiper-container class="swiper-groups" init="false">
+            <swiper-slide><a href="{% url 'group' %}?=kfp" class="item-nav-menu {% if "?=kfp" in request.get_full_path %} active-nav-menu {% endif %}">KazFoodProducts</a></swiper-slide>
+            <swiper-slide><a href="{% url 'group' %}?=bio" class="item-nav-menu {% if "?=bio" in request.get_full_path %} active-nav-menu {% endif %}">BioOperations</a></swiper-slide>
+            <swiper-slide><a href="{% url 'group' %}?=emc" class="item-nav-menu {% if "?=emc" in request.get_full_path %} active-nav-menu {% endif %}">EMC Agro</a></swiper-slide>
+            <swiper-slide><a href="{% url 'group' %}?=bys" class="item-nav-menu {% if "?=bys" in request.get_full_path %} active-nav-menu {% endif %}">Баян Сулу</a></swiper-slide>
+            <swiper-slide><a href="{% url 'group' %}?=kok" class="item-nav-menu {% if "?=kok" in request.get_full_path %} active-nav-menu {% endif %}">Коктал-Агро</a></swiper-slide>
+            <swiper-slide><a href="{% url 'group' %}?=tas" class="item-nav-menu {% if "?=tas" in request.get_full_path %} active-nav-menu {% endif %}">ТастобеАгроФуд</a></swiper-slide>
+            <swiper-slide><a href="{% url 'group' %}?=ele" class="item-nav-menu {% if "?=ele" in request.get_full_path %} active-nav-menu {% endif %}">Элеватор Тайынша</a></swiper-slide>
+            <swiper-slide><a href="{% url 'group' %}?=eae" class="item-nav-menu {% if "?=eae" in request.get_full_path %} active-nav-menu {% endif %}">Eastern Express</a></swiper-slide>
+        </swiper-container>
+    </section>
+
+    {% if "?=kfp" in request.get_full_path %}
+        {% include "groups/kfp.html" %}
+    {% elif "?=bio" in request.get_full_path %}
+        {% include "groups/bio.html" %}
+    {% elif "?=emc" in request.get_full_path %}
+        {% include "groups/emc.html" %}
+    {% elif "?=bys" in request.get_full_path %}
+        {% include "groups/bys.html" %}
+    {% elif "?=kok" in request.get_full_path %}
+        {% include "groups/kok.html" %}
+    {% elif "?=tas" in request.get_full_path %}
+        {% include "groups/tas.html" %}
+    {% elif "?=ele" in request.get_full_path %}
+        {% include "groups/ele.html" %}
+    {% elif "?=eae" in request.get_full_path %}
+        {% include "groups/eae.html" %}
+    {% else %}
+        {% include "none.html" %}
+    {% endif %}
+
+    {% include "simple_footer.html" %}
+{% endblock %}

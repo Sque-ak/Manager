@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="keywords" content="Мука Алматы, Зерно Алматы, АО АзияАгроФуд, азияагрофуд, Патока Алматы, Завод АзияАгроФуд, AsiaAgroFood">
+    <meta name="description" content="Обладаем собственным производственным комплексом по выработке комбикормов, кормовых смесей и кормовых добавок, мощность 600 тонн готовой продукции в сутки. ">
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+    <meta name="format-detection" content="telephone=no">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/custom_fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom_style.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="shortcut icon" href={% static 'img/favicon.ico' %} type="image/x-icon">
+    <script src="{% static 'js/jquery-3.6.1.min.js'%}"></script>
+    <script src="{% static 'js/swiper-bundle.min.js'%}"></script>
+    {% if request.get_full_path == "/"  %}
+        <script src="{% static 'js/custom_script.js'%}"></script>
+    {% else %}
+        <script src="{% static 'js/custom_script2.js'%}"></script>
+    {% endif %}
+
+<body style="display: none;"> 
+    <header {% if request.get_full_path != "/"  %} class="active-header" {% endif %}>
+        <div class="header-conteinter">
+            <div class="logo-with-text">
+                <a href="/" id="logo-img"><img draggable="false" src="/static/css/img/logo.png" class="logo {% if request.get_full_path == "/" %} logo-change-size {% endif %}" alt="Логотип АО АзияАгроФуд"></a>
+                <a href="/" id="logo-txt" class="logo" {% if request.get_full_path == "/" %}style="display: none;"{% endif %}>         
+                    <div>
+                        <div>АО «АзияАгроФуд»</div>
+                        <div class="mini-desc-logo">{% block subtitle %}{% endblock %}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-panel">
+                <ul>
+                    {% if request.get_full_path == "/"  %}
+                        <li><a href="javascript:void(0);" class="nav-button col--bars" style="display: none;">
+                        <li>
+                            <div class="drop-menu">
+                                <a class="item-nav-menu page-2 dropdown-btn"> Компания <i class="col--arrow-down-2"></i></a>
+                                <div class="dropdown-content">
+                                    <a href="{% url 'about_us' %}" class="item-nav-menu link-to-page">О Компании</a>
+                                    <a href="{% url 'history_us' %}" class="item-nav-menu link-to-page">История</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="drop-menu">
+                                <a class="item-nav-menu dropdown-btn"> Группа компаний <i class="col--arrow-down-2"></i></a>
+                                <div class="dropdown-content">
+                                    <a href="{% url 'group' %}?=kfp" class="item-nav-menu link-to-page">KazFoodProducts</a>
+                                    <a href="{% url 'group' %}?=bio" class="item-nav-menu link-to-page">BioOperations</a>
+                                    <a href="{% url 'group' %}?=emc" class="item-nav-menu link-to-page">EMC Agro</a>
+                                    <a href="{% url 'group' %}?=bys" class="item-nav-menu link-to-page">Баян Сулу</a>
+                                    <a href="{% url 'group' %}?=kok" class="item-nav-menu link-to-page">Коктал-Агро</a>
+                                    <a href="{% url 'group' %}?=tas" class="item-nav-menu link-to-page">ТастобеАгроФуд</a>
+                                    <a href="{% url 'group' %}?=ele" class="item-nav-menu link-to-page">Элеватор Тайынша</a>
+                                    <a href="{% url 'group' %}?=eae" class="item-nav-menu link-to-page">Eastern Express</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="javascript:scrollToPage(3,0);" class="item-nav-menu page-3">Продукция
+                        <li><a href="{% url 'contacts' %}" class="item-nav-menu page-4 link-to-page">Контакты
+                        <li><a href="{% url 'shareholder' %}" class="item-nav-menu link-to-page"> Акционерам
+                        <li><a href="javascript:scrollToPage(4,0);" class="item-nav-menu page-4 col--arrow-down"></a></li>
+                    {% else %}
+                        <li><a href="javascript:void(0);" class="nav-button col--bars" style="display: none;">       
+                        <li>
+                            <div class="drop-menu">
+                                <a class="item-nav-menu {% if "/company" in request.path %} active-nav-menu {% endif %}  dropdown-btn">  Компания <i class="col--arrow-down-2"></i></a>
+                                <div class="dropdown-content">
+                                    <a href="{% url 'about_us' %}" class="item-nav-menu {% if "/about_us" in request.path %} active-nav-menu {% endif %} link-to-page">О Компании</a>
+                                    <a href="{% url 'history_us' %}" class="item-nav-menu {% if "/history_us" in request.path %} active-nav-menu {% endif %} link-to-page">История</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="drop-menu">
+                                <a class="item-nav-menu dropdown-btn {% if "/group" in request.path %} active-nav-menu {% endif %} "> Группа компаний <i class="col--arrow-down-2"></i></a>
+                                <div class="dropdown-content">
+                                    <a href="{% url 'group' %}?=kfp" class="item-nav-menu {% if "?=kfp" in request.get_full_path %} active-nav-menu {% endif %}">KazFoodProducts</a>
+                                    <a href="{% url 'group' %}?=bio" class="item-nav-menu {% if "?=bio" in request.get_full_path %} active-nav-menu {% endif %}">BioOperations</a>
+                                    <a href="{% url 'group' %}?=emc" class="item-nav-menu {% if "?=emc" in request.get_full_path %} active-nav-menu {% endif %}">EMC Agro</a>
+                                    <a href="{% url 'group' %}?=bys" class="item-nav-menu {% if "?=bys" in request.get_full_path %} active-nav-menu {% endif %}">Баян Сулу</a>
+                                    <a href="{% url 'group' %}?=kok" class="item-nav-menu {% if "?=kok" in request.get_full_path %} active-nav-menu {% endif %}">Коктал-Агро</a>
+                                    <a href="{% url 'group' %}?=tas" class="item-nav-menu {% if "?=tas" in request.get_full_path %} active-nav-menu {% endif %}">ТастобеАгроФуд</a>
+                                    <a href="{% url 'group' %}?=ele" class="item-nav-menu {% if "?=ele" in request.get_full_path %} active-nav-menu {% endif %}">Элеватор Тайынша</a>
+                                    <a href="{% url 'group' %}?=eae" class="item-nav-menu {% if "?=eae" in request.get_full_path %} active-nav-menu {% endif %}">Eastern Express</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="{% url 'main_page' %}" class="item-nav-menu link-to-page">Продукция
+                        <li><a href="{% url 'contacts' %}" class="item-nav-menu page-4 {% if request.get_full_path == "/contacts" %} active-nav-menu {% endif %} link-to-page">Контакты
+                        <li><a href="{% url 'shareholder' %}" class="item-nav-menu {% if request.get_full_path == "/shareholder" %} active-nav-menu {% endif %} link-to-page"> Акционерам
+                        <li><a href="javascript:scrollToPage(10,1);" class="item-nav-menu page-10 col--arrow-down"></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main class="main-page">
+        <div class="nav-menu">
+                <a href="{% url 'about_us' %}" class="item-nav-menu {% if request.get_full_path == "/about_us" %} active-nav-menu {% endif %} link-to-page">О Компании</a>
+                <a href="{% url 'history_us' %}" class="item-nav-menu {% if request.get_full_path == "/history_us" %} active-nav-menu {% endif %} link-to-page">История</a>
+                <a href="{% if request.get_full_path != "/" %} / {% else %} javascript:scrollToPage(3,1); {% endif %}" class="item-nav-menu page-3 {% if request.get_full_path != "/"  %} link-to-page {% endif %}"> Продукция
+                <a href="{% url 'contacts' %}" class="item-nav-menu page-4 {% if request.get_full_path == "/contacts" %} active-nav-menu {% endif %} link-to-page">Контакты
+                <a href="{% url 'shareholder' %}" class="item-nav-menu link-to-page {% if request.get_full_path == "/shareholder" %} active-nav-menu {% endif %}"> Акционерам
+                <a href="javascript:scrollToPage(4,1);" class="item-nav-menu page-4 col--arrow-down"></a>
+        </div>
+        <div class="overlay-site" style="display: none;"></div>
+    {% block content %}
+    {% endblock %}
+    </main>
+    {% if request.get_full_path == "/shareholder" %}
+    <footer>
+            <a href="#" class="col--arrow-up" style="display: none;"></a>
+    </footer>
+    {% endif %}
+</body>
