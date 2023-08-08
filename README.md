@@ -1,6 +1,5 @@
 # TODO Manager Version 2.1a
 Customer relationship management for AsiaAgroFood JSC; <br/>
-Better, Stronger and Faster i'm hoping;
 
 <br /> <br />
 Libs and Softs:
